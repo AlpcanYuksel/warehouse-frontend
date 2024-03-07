@@ -7,8 +7,13 @@ import { MenuComponent } from './core/component/menu/menu.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'menu', component: MenuComponent},
-  { path: '**', component: ErrorComponent },
+  { path:'menu', component: MenuComponent, 
+  children: [
+    { path: 'product-create', loadChildren: 
+        () => import('./modules/product/product.module')
+        .then(m => m.ProductModule) },
+  ]
+},
 ];
 
 @NgModule({
